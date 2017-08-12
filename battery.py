@@ -17,10 +17,14 @@ def battery_check():
 
 	img = os.path.abspath('battery2.png')
 
-	if(battery_percentage < 20 or battery_percentage > 90):
+	if(battery_percentage < 20):
 		if state == "discharging":
+			s.Popen(["notify-send", "-i", img, "BATTERY ALERT!!!", "Connect Charger"])
+
+	elif(battery_percentage >90):
+		if state == "charging":
 			s.Popen(["notify-send", "-i", img, "BATTERY ALERT!!!", "Disconnect Charger"])
-			#s.Popen(["notify-send", "Disconnect Charger"])
+			
 
 		timer = Timer(600, battery_check)
 		timer.start()
